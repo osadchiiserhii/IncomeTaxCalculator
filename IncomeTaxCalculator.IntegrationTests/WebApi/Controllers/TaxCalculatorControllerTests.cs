@@ -10,13 +10,13 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
-namespace IncomeTaxCalculator.UnitTests.WebApi.Controllers
+namespace IncomeTaxCalculator.IntegrationTests.WebApi.Controllers
 {
     public class TaxCalculatorControllerTests
     {
         private Mock<ILogger<TaxCalculatorController>> _loggerMock;
         private Mock<ITaxBandRepository> _mockTaxBandRepository;
-        
+
         private TaxCalculatorController _controller;
         private ISalaryTaxAppService _salaryTaxAppService;
         private ITaxCalculatorService _taxCalculatorService;
@@ -27,7 +27,7 @@ namespace IncomeTaxCalculator.UnitTests.WebApi.Controllers
             _taxCalculatorService = new TaxCalculatorService();
             _mockTaxBandRepository = new Mock<ITaxBandRepository>();
             _salaryTaxAppService = new SalaryTaxAppService(_taxCalculatorService, _mockTaxBandRepository.Object);
-            _loggerMock = new ();
+            _loggerMock = new();
 
             _controller = new TaxCalculatorController(_loggerMock.Object, _salaryTaxAppService);
         }

@@ -8,7 +8,7 @@ using IncomeTaxCalculator.Domain.Services;
 using Moq;
 using NUnit.Framework;
 
-namespace IncomeTaxCalculator.UnitTests.Domain.Services
+namespace IncomeTaxCalculator.IntegrationTests.Domain.Services
 {
     [TestFixture]
     public class SalaryTaxAppServiceTests
@@ -58,7 +58,6 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
         public async Task GetCalculatedSalaryAsync_Should_ReturnErrorResult_When_TaxBandRepositoryReturnsEmptyList()
         {
             // Arrange
-            _taxCalculatorService = new TaxCalculatorService();
             decimal grossAnnualSalary = 40000;
             var cancellationToken = CancellationToken.None;
 
@@ -74,7 +73,6 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
         public async Task GetCalculatedSalaryAsync_Should_ReturnErrorResult_When_GrossAnnualSalaryIsNegative()
         {
             // Arrange
-            _taxCalculatorService = new TaxCalculatorService();
             decimal grossAnnualSalary = -10000;
             var cancellationToken = CancellationToken.None;
 
