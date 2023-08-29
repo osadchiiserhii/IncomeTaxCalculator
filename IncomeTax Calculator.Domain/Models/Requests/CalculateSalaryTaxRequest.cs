@@ -1,6 +1,6 @@
 ﻿namespace IncomeTaxCalculator.Domain.Models.Requests
 {
-    public class CalculateSalaryTaxRequest
+    public record CalculateSalaryTaxRequest
     {
         public decimal GrossAnnualSalary { get; set; }
     }

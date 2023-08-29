@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using IncomeTaxCalculator.Domain.Entities;
+﻿using IncomeTaxCalculator.Domain.Entities;
 using IncomeTaxCalculator.Domain.Errors;
 using IncomeTaxCalculator.Domain.Exceptions;
 using IncomeTaxCalculator.Domain.Interfaces.Repositories;
@@ -9,21 +8,21 @@ using IncomeTaxCalculator.Domain.Services;
 using Moq;
 using NUnit.Framework;
 
-namespace IncomeTaxCalculator.UnitTests.Domain.Services
+namespace IncomeTaxCalculator.IntegrationTests.Domain.Services
 {
     [TestFixture]
     public class SalaryTaxAppServiceTests
     {
-        private Mock<ITaxCalculatorService> _mockTaxCalculatorService;
+        private ITaxCalculatorService _taxCalculatorService;
         private Mock<ITaxBandRepository> _mockTaxBandRepository;
         private SalaryTaxAppService _salaryTaxAppService;
 
         [SetUp]
         public void Setup()
         {
-            _mockTaxCalculatorService = new Mock<ITaxCalculatorService>();
+            _taxCalculatorService = new TaxCalculatorService();
             _mockTaxBandRepository = new Mock<ITaxBandRepository>();
-            _salaryTaxAppService = new SalaryTaxAppService(_mockTaxCalculatorService.Object, _mockTaxBandRepository.Object);
+            _salaryTaxAppService = new SalaryTaxAppService(_taxCalculatorService, _mockTaxBandRepository.Object);
         }
 
         [Test]
@@ -35,7 +34,7 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
             {
                 new TaxBand { LowerLimit = 0, UpperLimit = 5000, TaxRate = 0 },
                 new TaxBand { LowerLimit = 5000, UpperLimit = 20000, TaxRate = 20 },
-                new TaxBand { LowerLimit = 20000, TaxRate = 40 }
+                new TaxBand { LowerLimit = 20000, UpperLimit = decimal.MaxValue, TaxRate = 40 }
             };
 
             _mockTaxBandRepository.Setup(repo => repo.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(taxBands);
@@ -46,10 +45,6 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
                 AnnualTaxPaid = 11000,
                 NetAnnualSalary = 29000
             };
-
-            _mockTaxCalculatorService
-                .Setup(service => service.CalculateTax(grossAnnualSalary, taxBands))
-                .Returns(Result.Ok(expectedResponse));
 
             // Act
             var result = await _salaryTaxAppService.GetCalculatedSalaryAsync(grossAnnualSalary);
@@ -66,10 +61,6 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
             decimal grossAnnualSalary = 40000;
             var cancellationToken = CancellationToken.None;
 
-            _mockTaxCalculatorService
-                .Setup(service => service.CalculateTax(It.IsAny<decimal>(), It.IsAny<List<TaxBand>>()))
-                .Returns(Result.Fail(new NotFoundError("")));
-            
             // Act
             var result = await _salaryTaxAppService.GetCalculatedSalaryAsync(grossAnnualSalary, cancellationToken);
 
@@ -84,10 +75,6 @@ namespace IncomeTaxCalculator.UnitTests.Domain.Services
             // Arrange
             decimal grossAnnualSalary = -10000;
             var cancellationToken = CancellationToken.None;
-
-            _mockTaxCalculatorService
-                .Setup(service => service.CalculateTax(It.IsAny<decimal>(), It.IsAny<List<TaxBand>>()))
-                .Returns(Result.Fail(new ValidationError("")));
 
             // Act
             var result = await _salaryTaxAppService.GetCalculatedSalaryAsync(grossAnnualSalary, cancellationToken);

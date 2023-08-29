@@ -1,6 +1,6 @@
 ﻿namespace IncomeTaxCalculator.Domain.Models.Responses
 {
-    public class CalculatedSalaryResponse
+    public record CalculatedSalaryResponse
     {
         private decimal _grossAnnualSalary;
         public decimal GrossAnnualSalary
