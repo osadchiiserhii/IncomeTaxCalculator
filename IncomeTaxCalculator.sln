@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncomeTaxCalculator.WebApi"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncomeTaxCalculator.DAL", "IncomeTaxCalculator.DAL\IncomeTaxCalculator.DAL.csproj", "{5A9E152D-17AB-4401-981A-08EA79F04B96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncomeTaxCalculator.UnitTests", "IncomeTaxCalculator.UnitTests\IncomeTaxCalculator.UnitTests.csproj", "{C74022EF-5736-4B3B-971F-4F6BD1EA1F93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncomeTaxCalculator.UnitTests", "IncomeTaxCalculator.UnitTests\IncomeTaxCalculator.UnitTests.csproj", "{C74022EF-5736-4B3B-971F-4F6BD1EA1F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncomeTaxCalculator.IntegrationTests", "IncomeTaxCalculator.IntegrationTests\IncomeTaxCalculator.IntegrationTests.csproj", "{6EB1D29D-3F20-44D5-B880-AA9BF314DDDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C74022EF-5736-4B3B-971F-4F6BD1EA1F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C74022EF-5736-4B3B-971F-4F6BD1EA1F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C74022EF-5736-4B3B-971F-4F6BD1EA1F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB1D29D-3F20-44D5-B880-AA9BF314DDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB1D29D-3F20-44D5-B880-AA9BF314DDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB1D29D-3F20-44D5-B880-AA9BF314DDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB1D29D-3F20-44D5-B880-AA9BF314DDDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
